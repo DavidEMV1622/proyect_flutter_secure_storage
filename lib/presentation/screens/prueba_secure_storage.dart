@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/utils/secure_storage_methods.dart';
 
+import '../widgets/checkBox.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -9,18 +11,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Llave global
   final GlobalKey<FormState> _formKey = GlobalKey();
+  // Declarar cada controlodador
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  // Declarar el llamado de la clase SecureStorageMethods para utilizar los metodos (set, get)
   final SecureStorageMethods _secureStorageMethods = SecureStorageMethods();
 
+  // Se ejecuta una vez antes de que se ejecute el StatefulWidget
   @override
   void initState() {
     super.initState();
     fetchSecureStorageData();
   }
 
+  // Metodo para obtener datos
   Future <void> fetchSecureStorageData() async {
+    /* El keyword "await" se utiliza en el metodo "fetchSecureStorageData()" 
+    para esperar a que estos métodos asíncronos (async) se completen antes de asignar 
+    los valores recuperados u obtenidos (getUserName, getPassword) a los controladores 
+    _userNameController y _passwordController. */
     _userNameController.text = await _secureStorageMethods.getUserName() ?? "";
     _passwordController.text = await _secureStorageMethods.getPassword() ?? "";
   }
@@ -36,17 +47,16 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       child: Icon(Icons.key),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: EdgeInsets.only(left: 8.0),
                       child: Text(
-                        'Flutter Secure Storage',
-                        style: Theme.of(context).textTheme.headline5,
+                        'Prueba del Flutter Secure Storage',
                       ),
                     )
                   ],
@@ -55,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
                     controller: _userNameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Username',
                     ),
                   ),
@@ -65,17 +75,32 @@ class _HomePageState extends State<HomePage> {
                   child: TextFormField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Password',
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CheckBox(
+                        userName: _secureStorageMethods.setUserName(_userNameController.text),
+                        password: _secureStorageMethods.setPassword(_passwordController.text)
+                      ),
+                      const Text("Recuerdame"),
+                    ],
+                  ),
+                ),/*
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () async {
+                        // Almacena el contenido de los formularios
                         await _secureStorageMethods.setUserName(_userNameController.text);
                         await _secureStorageMethods.setPassword(_passwordController.text);
                       },
@@ -85,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                ),
+                ), */
               ],
             ),
           ),
@@ -93,4 +118,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  }
+}

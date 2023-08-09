@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isChecked = false; // Si se llena (true) o no (false) el check
   // Llave global
   final GlobalKey<FormState> _formKey = GlobalKey();
   // Declarar cada controlodador
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     fetchSecureStorageData();
   }
 
-  // Metodo para obtener datos
+  // Metodo para obtener datos (get)
   Future <void> fetchSecureStorageData() async {
     /* El keyword "await" se utiliza en el metodo "fetchSecureStorageData()" 
     para esperar a que estos métodos asíncronos (async) se completen antes de asignar 
@@ -80,20 +81,45 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                //       Checkbox(
+                //       checkColor: Colors.white,
+                //       //fillColor: MaterialStateProperty.resolveWith(_getColor),
+                //       value: isChecked,
+                //       onChanged: (bool? value) async {
+                //         setState(() {
+                //           isChecked = value!;
+                //         });
+                //         if (value == true) {
+                //           await _secureStorageMethods.setUserName(_userNameController.text);
+                //           await _secureStorageMethods.setPassword(_passwordController.text);
+                //         }
+                //       },
+                //     ),
+                //     const Text("Recuerdame"),
+                //     ],
+                //   ),
+                // ),
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CheckBox(
-                        userName: _secureStorageMethods.setUserName(_userNameController.text),
-                        password: _secureStorageMethods.setPassword(_passwordController.text)
+                      CheckBox( // Uso de un checkBox
+                        userNameController: _userNameController,
+                        passwordController: _passwordController,
                       ),
                       const Text("Recuerdame"),
                     ],
                   ),
-                ),/*
+                ),
+                /*
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: SizedBox(

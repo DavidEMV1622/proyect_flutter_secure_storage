@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/screens/sesion_iniciada_page.dart';
 import 'package:flutter_application_1/presentation/utils/secure_storage_methods.dart';
 
 import '../widgets/checkBox.dart';
+import 'avisos_prueba.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +21,8 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _passwordController = TextEditingController();
   // Declarar el llamado de la clase SecureStorageMethods para utilizar el metodo get en los controladores
   final SecureStorageMethods _secureStorageMethods = SecureStorageMethods();
+
+  final String _isNotices = "false";
 
   // Se ejecuta una vez antes de que se ejecute el StatefulWidget
   @override
@@ -112,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CheckBox( // Uso de un checkBox
-                        // Mandar los controladores a utilizar
+                        // Mandar los controladores a utilizar oara cada formulario
                         userNameController: _userNameController,
                         passwordController: _passwordController,
                       ),
@@ -138,6 +142,29 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ), */
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        /*if (await _secureStorageMethods.getIsNotices(_isNotices.characters) == "false") {
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AvisosPage()));
+                          await _secureStorageMethods.setIsNotices("true");
+                        } else {
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => InicioPage()));
+                        }
+                        */
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text('Siguiente pantalla'),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

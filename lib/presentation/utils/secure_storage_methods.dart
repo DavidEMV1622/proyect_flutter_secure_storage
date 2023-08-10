@@ -1,4 +1,5 @@
 //import 'package:flutter/foundation.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageMethods {
@@ -8,6 +9,16 @@ class SecureStorageMethods {
   // Nombre de cada llave
   final String _keyUserName = 'username';
   final String _keyPassWord = 'password';
+
+  final String _keyIsNotices = "Notices";
+
+  Future setIsNotices(String isNotices) async {
+    await storage.write(key: _keyIsNotices, value: isNotices);
+  }
+  Future <String?> getIsNotices(TextEditingController isNotices) async {
+    return await storage.read(key: _keyIsNotices);
+  } 
+
 
   // Metodo set para asignar nombre
   Future setUserName(String username) async {

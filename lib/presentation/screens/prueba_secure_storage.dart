@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   // Declarar cada controlodador
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // Declarar el llamado de la clase SecureStorageMethods para utilizar los metodos (set, get)
+  // Declarar el llamado de la clase SecureStorageMethods para utilizar el metodo get en los controladores
   final SecureStorageMethods _secureStorageMethods = SecureStorageMethods();
 
   // Se ejecuta una vez antes de que se ejecute el StatefulWidget
@@ -112,6 +112,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CheckBox( // Uso de un checkBox
+                        // Mandar los controladores a utilizar
                         userNameController: _userNameController,
                         passwordController: _passwordController,
                       ),

@@ -16,7 +16,7 @@ class SecureStorageMethods {
     await storage.write(key: _keyIsNotices, value: isNotices.toString());
   }
   Future<bool?> getIsNotices() async {
-    String? isNoticesValue = await storage.read(key: _keyIsNotices);
+    var isNoticesValue = await storage.read(key: _keyIsNotices);
     return isNoticesValue == 'true';
   }
 

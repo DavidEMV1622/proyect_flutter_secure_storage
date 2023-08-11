@@ -37,6 +37,8 @@ class _HomePageState extends State<HomePage> {
     _userNameController y _passwordController. */
     _userNameController.text = await _secureStorageMethods.getUserName() ?? "";
     _passwordController.text = await _secureStorageMethods.getPassword() ?? "";
+    // Para establecer las notificaciones
+    await _secureStorageMethods.setIsNotices(true);
   }
 
   @override
@@ -146,19 +148,14 @@ class _HomePageState extends State<HomePage> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () async {
-                        // Para establecer las notificaciones
-                        await _secureStorageMethods.setIsNotices(true);
-
-                        // Para obtener el estado de las notificaciones
+                        // Se obtiene el estado si es true o false
                         bool? isNotices = await _secureStorageMethods.getIsNotices();
 
-                        // Aquí puedes utilizar el valor de isNotices, por ejemplo:
-                        if (isNotices == true) {
-                          // Si las notificaciones están activadas, navega a la pantalla de AvisosPage
+                        // Si isNotices es true, se pasa a las ventanas de avisos de lo contrario pasa a la ventana de inicio de sesion
+                        if (isNotices!) {
+                          await _secureStorageMethods.setIsNotices(false);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
                         } else {
-                          // Si las notificaciones están desactivadas, puedes hacer algo diferente
-                          // por ejemplo, navegar a otra pantalla (por ejemplo, InicioPage).
                           Navigator.push(context, MaterialPageRoute(builder: (context) => InicioPage()));
                         }
 

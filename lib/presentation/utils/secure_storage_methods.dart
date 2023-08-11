@@ -10,14 +10,15 @@ class SecureStorageMethods {
   final String _keyUserName = 'username';
   final String _keyPassWord = 'password';
 
-  final String _keyIsNotices = "Notices";
+  final String _keyIsNotices = 'isNotices';
 
-  Future setIsNotices(String isNotices) async {
-    await storage.write(key: _keyIsNotices, value: isNotices);
+  Future setIsNotices(bool isNotices) async {
+    await storage.write(key: _keyIsNotices, value: isNotices.toString());
   }
-  Future <String?> getIsNotices(TextEditingController isNotices) async {
-    return await storage.read(key: _keyIsNotices);
-  } 
+  Future<bool?> getIsNotices() async {
+    String? isNoticesValue = await storage.read(key: _keyIsNotices);
+    return isNoticesValue == 'true';
+  }
 
 
   // Metodo set para asignar nombre

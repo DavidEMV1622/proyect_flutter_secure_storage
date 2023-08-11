@@ -22,8 +22,6 @@ class _HomePageState extends State<HomePage> {
   // Declarar el llamado de la clase SecureStorageMethods para utilizar el metodo get en los controladores
   final SecureStorageMethods _secureStorageMethods = SecureStorageMethods();
 
-  final String _isNotices = "false";
-
   // Se ejecuta una vez antes de que se ejecute el StatefulWidget
   @override
   void initState() {
@@ -148,15 +146,23 @@ class _HomePageState extends State<HomePage> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () async {
-                        /*if (await _secureStorageMethods.getIsNotices(_isNotices.characters) == "false") {
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AvisosPage()));
-                          await _secureStorageMethods.setIsNotices("true");
+                        // Para establecer las notificaciones
+                        await _secureStorageMethods.setIsNotices(true);
+
+                        // Para obtener el estado de las notificaciones
+                        bool? isNotices = await _secureStorageMethods.getIsNotices();
+
+                        // Aquí puedes utilizar el valor de isNotices, por ejemplo:
+                        if (isNotices == true) {
+                          // Si las notificaciones están activadas, navega a la pantalla de AvisosPage
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
                         } else {
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => InicioPage()));
+                          // Si las notificaciones están desactivadas, puedes hacer algo diferente
+                          // por ejemplo, navegar a otra pantalla (por ejemplo, InicioPage).
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => InicioPage()));
                         }
-                        */
+
+                        
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),

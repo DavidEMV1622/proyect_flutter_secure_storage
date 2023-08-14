@@ -12,7 +12,10 @@ class AvisosPage  extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Manejo del texto
             Text("Pantalla de avisos"),
+
+            // Maanejo del boton
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: SizedBox(
@@ -22,6 +25,7 @@ class AvisosPage  extends StatelessWidget {
                     Navigator.push(context,
                     MaterialPageRoute(builder: (context) => InicioPage()));
                   },
+                  // Texto del boton
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.0),
                     child: Text('Siguiente pantalla'),

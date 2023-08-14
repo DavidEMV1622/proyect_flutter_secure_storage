@@ -1,4 +1,3 @@
-//import 'package:flutter/foundation.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -12,12 +11,14 @@ class SecureStorageMethods {
 
   final String _keyIsNotices = 'isNotices';
 
+  // Metodo set para asignar la respuesta en bool 
   Future setIsNotices(bool isNotices) async {
-    await storage.write(key: _keyIsNotices, value: isNotices.toString());
+    await storage.write(key: _keyIsNotices, value: isNotices.toString()); // "toString" convertir bool a String
   }
+  // Metodo get para obtener la respuesta en bool
   Future<bool?> getIsNotices() async {
     var isNoticesValue = await storage.read(key: _keyIsNotices);
-    return isNoticesValue == 'true';
+    return isNoticesValue == 'true'; // Si es igual a true, returna true de lo contrario retorna false
   }
 
 

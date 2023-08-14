@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     fetchSecureStorageData();
   }
 
-  // Metodo para obtener datos (get)
+  // Metodo para obtener datos y asignar true isNotice
   Future <void> fetchSecureStorageData() async {
     /* El keyword "await" se utiliza en el metodo "fetchSecureStorageData()" 
     para esperar a que estos métodos asíncronos (async) se completen antes de asignar 
@@ -37,8 +37,8 @@ class _HomePageState extends State<HomePage> {
     _userNameController y _passwordController. */
     _userNameController.text = await _secureStorageMethods.getUserName() ?? "";
     _passwordController.text = await _secureStorageMethods.getPassword() ?? "";
-    // Para establecer las notificaciones
-    await _secureStorageMethods.setIsNotices(true);
+
+    await _secureStorageMethods.setIsNotices(true); // Para inicializar las notificaciones a true
   }
 
   @override
@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Manejo del icono y texto en una fila
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -66,6 +67,8 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
+                
+                // Manejo del formulario usuario
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
@@ -75,6 +78,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+
+                // Manejo del formulario de la contraseña
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
@@ -85,30 +90,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 20),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       Checkbox(
-                //       checkColor: Colors.white,
-                //       //fillColor: MaterialStateProperty.resolveWith(_getColor),
-                //       value: isChecked,
-                //       onChanged: (bool? value) async {
-                //         setState(() {
-                //           isChecked = value!;
-                //         });
-                //         if (value == true) {
-                //           await _secureStorageMethods.setUserName(_userNameController.text);
-                //           await _secureStorageMethods.setPassword(_passwordController.text);
-                //         }
-                //       },
-                //     ),
-                //     const Text("Recuerdame"),
-                //     ],
-                //   ),
-                // ),
+
+                // Manejo del checkBox
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Row(
@@ -124,31 +107,15 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                /*
+                
+                // Manejo del boton
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width, // Largo del boton Response
                     child: ElevatedButton(
                       onPressed: () async {
-                        // Almacena el contenido de los formularios
-                        await _secureStorageMethods.setUserName(_userNameController.text);
-                        await _secureStorageMethods.setPassword(_passwordController.text);
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text('Save'),
-                      ),
-                    ),
-                  ),
-                ), */
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        // Se obtiene el estado si es true o false
+                        // Se obtiene el estado de isNotice si es true o false
                         bool? isNotices = await _secureStorageMethods.getIsNotices();
 
                         // Si isNotices es true, se pasa a las ventanas de avisos de lo contrario pasa a la ventana de inicio de sesion
@@ -158,9 +125,8 @@ class _HomePageState extends State<HomePage> {
                         } else {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => InicioPage()));
                         }
-
-                        
                       },
+                      // Texto del boton
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),
                         child: Text('Siguiente pantalla'),

@@ -1,4 +1,3 @@
-import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageMethods {
@@ -40,5 +39,5 @@ class SecureStorageMethods {
   // Metodo get para obtener la contrasenia del usuario
   Future <String?> getPassword() async {
     return await storage.read(key: _keyPassWord);
-  } 
+  }
 }

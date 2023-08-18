@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/sesion_iniciada_page.dart';
 import 'package:flutter_application_1/presentation/utils/secure_storage_methods.dart';
 
+import '../utils/DtoEmail.dart';
 import '../widgets/checkBox.dart';
 import 'avisos_prueba.dart';
 
 class HomePage extends StatefulWidget {
+
   const HomePage({super.key});
 
   @override
@@ -13,6 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<DtoEmail> emailOfUser = [
+    //DtoEmail("david@gmail.com"),
+  ];
+
   bool isChecked = false; // Si se llena (true) o no (false) el check
   // Llave global
   final GlobalKey<FormState> _formKey = GlobalKey();
@@ -130,6 +137,85 @@ class _HomePageState extends State<HomePage> {
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),
                         child: Text('Siguiente pantalla'),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Manejo del boton para probar la lista
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width, // Largo del boton Response
+                    child: ElevatedButton(
+                      onPressed: () {
+                        bool isEmail = false;
+                        
+                        if (_userNameController.text.isNotEmpty) {
+
+                          if (emailOfUser.isNotEmpty) {
+
+                            // ciclo para saber si se encuentra el email en la lista
+                            for (int i = 0; i < emailOfUser.length; i++) {
+                              if (emailOfUser[i].email == _userNameController.text) { // Si lo encuentra
+                                isEmail = true; // No muestra la pantalla de avisos
+                              }
+                            }
+
+                            if (isEmail) {
+                              
+                              for (int i = 0; i < emailOfUser.length; i++) {
+
+                                // Ciclo para saber si existe el correo para no mostrar nuevamente la pantalla de avisos
+                                if (emailOfUser[i].email == _userNameController.text) {
+                                  print("Comparando Iguales: ${emailOfUser[i].email} == ${_userNameController.text}");
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => InicioPage()));
+                                }
+                              // else {
+                              //   print(" ");
+                              //   print("Comparando NO son Iguales: ${emailOfUser[i].email} == ${_userNameController.text}");
+                              //   emailOfUser.add(DtoEmail(_userNameController.text));
+                              //   print("Como no son iguales, se guarda: ${emailOfUser[i].email}");
+                              //   Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
+                              // }
+                              }
+
+                            } else {
+                              emailOfUser.add(DtoEmail(_userNameController.text));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
+                            }
+
+                          } else {
+                            emailOfUser.add(DtoEmail(_userNameController.text));
+                            print("NO hay datos en la lista, agregando: ${emailOfUser[0].email}");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
+                          }
+
+                        } else {
+                          print("No hay nada en el formulario Username, llenelo por favor");
+                          /*
+                          if (emailOfUser.isEmpty) {
+                            print("No hay nada en el formulario Username, llenelo por favor");
+
+                          } else {
+                            emailOfUser.add(DtoEmail(_userNameController.text));
+                            print("NO hay datos en la lista, agregando: ${emailOfUser[0].email}");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage())); 
+                          }
+                          */
+                        }
+                        
+                        // // Formas dde agregar datos a la lista
+                        // print("${emailOfUser[0].email}");
+                        // emailOfUser.add(DtoEmail("Correo"));
+                        // print("${emailOfUser[1].email}");
+                        // emailOfUser.add(DtoEmail(_userNameController.text));
+                        // print("${emailOfUser[2].email}");
+                      },
+                      // Texto del boton
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text('Imprimir Lista'),
                       ),
                     ),
                   ),

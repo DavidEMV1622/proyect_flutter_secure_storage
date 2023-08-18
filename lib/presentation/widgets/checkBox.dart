@@ -7,7 +7,7 @@ class CheckBox extends StatefulWidget {
   final TextEditingController userNameController;
   final TextEditingController passwordController;
   const CheckBox({
-    super.key, 
+    super.key,
     // required this.userName,
     // required this.password,
     required this.userNameController, 

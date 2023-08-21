@@ -1,3 +1,6 @@
+import 'dart:convert'; // Libreria para utilizar las funciones del JSON
+import 'package:flutter/material.dart';
+// Libreria para utilizar las funciones del flutter secure storage
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageMethods {
@@ -7,6 +10,7 @@ class SecureStorageMethods {
   // Nombre de cada llave
   final String _keyUserName = 'username';
   final String _keyPassWord = 'password';
+  final String _keyListEmail = 'listEmail';
 
   final String _keyIsNotices = 'isNotices';
 
@@ -39,5 +43,25 @@ class SecureStorageMethods {
   // Metodo get para obtener la contrasenia del usuario
   Future <String?> getPassword() async {
     return await storage.read(key: _keyPassWord);
+  }
+
+
+  // Metodo para guardar la lista de Email en un JSON
+  Future <void> setListEmail(List<String> listEmail) async {
+    String myListEmailJson = jsonEncode(listEmail); /* Convertir la lista (formato Dart) 
+                                                    en formato JSON */
+    await storage.write(key: _keyListEmail, value: myListEmailJson);
+  }
+
+  // Metodo para obtener la lista de Email de un JSON
+  Future <List<String>> getListEmail() async {
+    String? obtainedStorageListEmailJson = await storage.read(key: _keyListEmail);
+
+    if (obtainedStorageListEmailJson != null) { // Si la lista es diferente de nulo
+      List <dynamic> obtainedStorageList = jsonDecode(obtainedStorageListEmailJson); /* Obtiene el formato JSON y lo 
+                                                                                    convierte en formato de codigo Dart */
+      return List<String>.from(obtainedStorageList); // retorna el contenido de la lista
+    }
+    return []; // Si no hay nada en la lista, retorna la lista vacia
   }
 }

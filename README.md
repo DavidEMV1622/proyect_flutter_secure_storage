@@ -33,5 +33,5 @@ historias de Usuario.
 
 1) prueba_secure_storage.dart: Contiene uso del checkbox para guardar automaticamente el contenido de los formularios (username y password), y 5 botones de prueba.
 
-2) prueba_secure_storage_two.dart: Aparte del contenido del dart anterior (prueba_secure_storage.dart), solo tiene dos botones:
-- "Imprimir Lista Aplicando el JSON": contiene el metodo para cambiar pantallas "changeScreens", donde guarda el usuario en una lista usando el paquete flutter_secure_storage y utilizando el convertidor JSON para guardar la lista, si existe el usuario en la lista muestra la pantalla de logeo, de lo contrario muestra la pantalla de avisos.
+2) prueba_secure_storage_two.dart: Aparte del contenido del dart anterior (prueba_secure_storage.dart), se elimina los 5 botones para que que quede uno:
+- "Imprimir Lista Aplicando el JSON": contiene el metodo para cambiar pantallas "changeScreens", donde guarda el usuario en una lista  y utilizando el convertidor JSON para guardar la lista y al final de tener la lista se utiliza el paquete flutter_secure_storage para guardarlo, si existe el usuario en la lista muestra la pantalla de logeo, de lo contrario muestra la pantalla de avisos.

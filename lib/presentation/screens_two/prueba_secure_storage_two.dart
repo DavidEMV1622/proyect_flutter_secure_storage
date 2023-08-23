@@ -16,7 +16,7 @@ class HomePageTwo extends StatefulWidget {
 class _HomePageTwoState extends State<HomePageTwo> {
 
   List<String> newListEmail = []; // Listas de usuarios
-  List<DtoEmailTwo> newListUserObject = []; // Listas de usuarios
+  //List<DtoEmailTwo> newListUserObject = []; // Listas de usuarios Objeto
 
   bool isChecked = false; // Si se llena (true) o no (false) el check
   // Llave global
@@ -146,23 +146,23 @@ class _HomePageTwoState extends State<HomePageTwo> {
                   ),
                 ),
 
-                /* Mismo boton, pero la lista es un objeto*/
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width, // Largo del boton Response
-                    child: ElevatedButton(
-                      onPressed: () {
-                        changeScreensObjects(); // Llamado del metodo para cambiar pantallas
-                      },
-                      // Texto del boton
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text('Imprimir Lista aplicando el JSON'),
-                      ),
-                    ),
-                  ),
-                ),
+                // /* Mismo boton, pero la lista es un objeto*/
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: SizedBox(
+                //     width: MediaQuery.of(context).size.width, // Largo del boton Response
+                //     child: ElevatedButton(
+                //       onPressed: () {
+                //         changeScreensObjects(); // Llamado del metodo para cambiar pantallas
+                //       },
+                //       // Texto del boton
+                //       child: const Padding(
+                //         padding: EdgeInsets.symmetric(vertical: 20.0),
+                //         child: Text('Imprimir Lista aplicando el JSON'),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -181,6 +181,7 @@ class _HomePageTwoState extends State<HomePageTwo> {
 
         // ciclo para saber si se encuentra el email en la lista
         for (int i = 0; i < newListEmail.length; i++) {
+          print("Contenido de la lista en la posicion ${i}: ${newListEmail[i]}");
           if (newListEmail[i] == _userNameController.text) { // Si lo encuentra
             isEmail = true; /* No muestra la pantalla de avisos (true) de lo 
                             contrario se muestra dicha pantalla (false)*/
@@ -210,43 +211,43 @@ class _HomePageTwoState extends State<HomePageTwo> {
   }
 
 
-  // Metodo para utilizar la lista con un constructor
-  changeScreensObjects() {
-    bool isEmail = false;
+  // // Metodo para utilizar la lista con un constructor
+  // changeScreensObjects() {
+  //   bool isEmail = false;
     
-    if (_userNameController.text.isNotEmpty) { // Si el formulario USername no esta vacio
+  //   if (_userNameController.text.isNotEmpty) { // Si el formulario USername no esta vacio
 
-      if (newListEmail.isNotEmpty) { // Si no esta vacia la lista
+  //     if (newListEmail.isNotEmpty) { // Si no esta vacia la lista
 
-        // ciclo para saber si se encuentra el email en la lista
-        for (int i = 0; i < newListUserObject.length; i++) {
-          if (newListUserObject[i].email == _userNameController.text) { // Si lo encuentra
-            isEmail = true; /* No muestra la pantalla de avisos (true) de lo 
-                            contrario se muestra dicha pantalla (false)*/
-            print("Comparando correos Iguales: ${newListUserObject[i].email} == ${_userNameController.text}");
-            print("Comparando contraseñas Iguales: ${newListUserObject[i].password} == ${_passwordController.text}");
-          }
-        }
+  //       // ciclo para saber si se encuentra el email en la lista
+  //       for (int i = 0; i < newListUserObject.length; i++) {
+  //         if (newListUserObject[i].email == _userNameController.text) { // Si lo encuentra
+  //           isEmail = true; /* No muestra la pantalla de avisos (true) de lo 
+  //                           contrario se muestra dicha pantalla (false)*/
+  //           print("Comparando correos Iguales: ${newListUserObject[i].email} == ${_userNameController.text}");
+  //           print("Comparando contraseñas Iguales: ${newListUserObject[i].password} == ${_passwordController.text}");
+  //         }
+  //       }
 
-        if (isEmail) { // Si encuentra el dato en la lista, se muetra la pantalla de logeo
-          Navigator.push(context, MaterialPageRoute(builder: (context) => InicioPage()));
+  //       if (isEmail) { // Si encuentra el dato en la lista, se muetra la pantalla de logeo
+  //         Navigator.push(context, MaterialPageRoute(builder: (context) => InicioPage()));
 
-        } else { // Si no se encontro el dato en la lista, se agrega el dato y se pasa a la pantalla de avisos
-          newListUserObject.add(DtoEmailTwo());
-          //emailOfUser.add(DtoEmail(_userNameController.text));
-          saveListEmailOfJSON(); // Metodo para guardar la lista
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
-        }
+  //       } else { // Si no se encontro el dato en la lista, se agrega el dato y se pasa a la pantalla de avisos
+  //         newListUserObject.add(DtoEmailTwo());
+  //         //emailOfUser.add(DtoEmail(_userNameController.text));
+  //         saveListEmailOfJSON(); // Metodo para guardar la lista
+  //         Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
+  //       }
 
-      } else { // Agrega el nuevo dato a la lista y se pasa a la pantalla de avisos
-        newListEmail.add(_userNameController.text);
-        print("NO hay datos en la lista, agregando: ${newListEmail[0]}");
-        saveListEmailOfJSON(); // Metodo para guardar la lista
-        Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
-      }
+  //     } else { // Agrega el nuevo dato a la lista y se pasa a la pantalla de avisos
+  //       newListEmail.add(_userNameController.text);
+  //       print("NO hay datos en la lista, agregando: ${newListEmail[0]}");
+  //       saveListEmailOfJSON(); // Metodo para guardar la lista
+  //       Navigator.push(context, MaterialPageRoute(builder: (context) => AvisosPage()));
+  //     }
 
-    } else { // Debe llenar el formulario
-      print("No hay nada en el formulario Username, llenelo por favor");
-    }
-  }
+  //   } else { // Debe llenar el formulario
+  //     print("No hay nada en el formulario Username, llenelo por favor");
+  //   }
+  // }
 }

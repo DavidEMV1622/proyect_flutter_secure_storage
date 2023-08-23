@@ -48,8 +48,7 @@ class SecureStorageMethods {
 
   // Metodo para guardar la lista de Email en un JSON
   Future <void> setListEmail(List<String> listEmail) async {
-    String myListEmailJson = jsonEncode(listEmail); /* Convertir la lista (formato Dart) 
-                                                    en formato JSON */
+    String myListEmailJson = jsonEncode(listEmail); /* Convertir la lista (formato Dart) a JSON */
     await storage.write(key: _keyListEmail, value: myListEmailJson);
   }
 
@@ -59,8 +58,15 @@ class SecureStorageMethods {
 
     if (obtainedStorageListEmailJson != null) { // Si la lista es diferente de nulo
       List <dynamic> obtainedStorageList = jsonDecode(obtainedStorageListEmailJson); /* Obtiene el formato JSON y lo 
-                                                                                    convierte en formato de codigo Dart */
-      return List<String>.from(obtainedStorageList); // retorna el contenido de la lista
+                                                                                    convierte en formato de codigo Dart 
+                                                                                    (se guarda en una la lista de tipo dynamic 
+                                                                                    porque es la manera en como trabaja la funcion 
+                                                                                    "jsonDecode", ya que a la hora de obtener los datos
+                                                                                    de un JSON los devuelve como tipo dynamic)*/
+      return List<String>.from(obtainedStorageList); /* "from" se crea  una nueva lista, pero especificando que sea de tipo
+                                                    String y retorna la lista (normalmente se utiliza la funcion "from" para 
+                                                    cuando se tiene una lista dinamica al principio y se especifica que sea 
+                                                    de otro tipo creando otra lista) */
     }
     return []; // Si no hay nada en la lista, retorna la lista vacia
   }

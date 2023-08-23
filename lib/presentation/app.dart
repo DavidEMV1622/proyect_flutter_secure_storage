@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // widget principal
       home: Center(
-        child: HomePageTwo(),
+        //child: HomePageTwo(),
+        child: HomePage(),
       ),
     );
   }
